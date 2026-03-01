@@ -1,0 +1,29 @@
+services:
+  # Backend API
+  - type: web
+    name: cell-avenue-api
+    runtime: docker
+    dockerFilePath: Render/backend.Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_EMBEDDING_MODEL
+        default: text-embedding-3-small
+      - key: OPENAI_CHAT_MODEL
+        default: gpt-4o-mini
+
+  # Frontend Web App
+  - type: web
+    name: cell-avenue-frontend
+    runtime: docker
+    dockerFilePath: Render/frontend.Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: cell-avenue-api
+          property: host

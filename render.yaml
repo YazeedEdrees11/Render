@@ -3,7 +3,7 @@ services:
   - type: web
     name: cell-avenue-api
     runtime: docker
-    dockerfile: backend.Dockerfile
+    dockerfile: /backend.Dockerfile
     dockerContext: .
     plan: free
     envVars:
@@ -18,7 +18,7 @@ services:
   - type: web
     name: cell-avenue-frontend
     runtime: docker
-    dockerfile: frontend.Dockerfile
+    dockerfile: /frontend.Dockerfile
     dockerContext: .
     plan: free
     envVars:
